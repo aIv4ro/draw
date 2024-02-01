@@ -1,15 +1,13 @@
-import { twitchFetch } from './services/twitch-fetch'
+import { SignInButton } from '@/components/sign-in-button'
+import { getServerSession } from 'next-auth'
 
 export default async function Home() {
-  const data = await twitchFetch({ 
-    path: '/users?login=alvaromg_22'
-  })
-
-  console.log(data)
+  const session = await getServerSession()
 
   return (
     <main>
       Twitch twgiveaway
+      {session == null && <SignInButton />}
     </main>
   )
 }
